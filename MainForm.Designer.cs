@@ -71,21 +71,87 @@ namespace SubtitleEncoder
 
         #endregion
 
-        private void selectFolderButton_Click(object sender, EventArgs e)
+        private async Task<string> PromptSaveOption()
+{
+    // Show a message box with the options
+    DialogResult result = MessageBox.Show("How do you want to save the files?\n\n1. Save all files in one folder (Fixed folder)\n2. Save files with exact subfolders (Fixed folder with subfolders)",
+        "Choose Saving Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+    // Determine the selected option
+    if (result == DialogResult.Yes)
+    {
+        return "one-folder";
+    }
+    else
+    {
+        return "with-subfolders";
+    }
+}
+
+        private async void selectFolderButton_Click(object sender, EventArgs e)
         {
             using (var folderDialog = new FolderBrowserDialog())
             {
-                // Show the dialog
+                // Show the dialog to select the input folder
                 DialogResult result = folderDialog.ShowDialog();
 
                 // If the user selects a folder
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
                 {
-                    // Display the selected folder path
-                    MessageBox.Show("You selected: " + folderDialog.SelectedPath);
+                    string inputFolder = folderDialog.SelectedPath;
+
+                    // Prompt the user to choose the save option
+                    using (var saveOptionDialog = new SaveOptionDialog())
+                    {
+                        DialogResult saveOptionResult = saveOptionDialog.ShowDialog();
+
+                        if (saveOptionResult == DialogResult.OK)
+                        {
+                            bool saveInFixedFolder = saveOptionDialog.SaveInFixedFolder;
+
+                            // Get the parent directory of the input folder
+                            // string outputFolder = saveInFixedFolder ? Path.Combine(GetParentDirectory(inputFolder), "FixedSubtitles") : GetParentDirectory(inputFolder);
+                            string outputFolder = Path.Combine(GetParentDirectory(inputFolder), "FixedSubtitles");
+
+                            try
+                            {
+                                await EncodeLogic.EncodeIntoUtf8(inputFolder, outputFolder, saveInFixedFolder);
+                                MessageBox.Show("The Subtitles are Written in this path:\n " + outputFolder);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Error Happened Dude.");
+                                // Optionally, you can show an error message to the user
+                                MessageBox.Show("An error occurred during encoding: " + ex.Message);
+                            }
+                        }
+                    }
                 }
             }
         }
+
+
+
+        private string GetParentDirectory(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentException("Path cannot be null or empty.", nameof(path));
+            }
+
+            // Get the directory information for the specified path
+            string parentDirectory = Path.GetDirectoryName(path);
+
+            // If the parent directory is null or empty, return the original path
+            if (string.IsNullOrEmpty(parentDirectory))
+            {
+                return path;
+            }
+
+            // Return the parent directory
+            return parentDirectory;
+        }
+
 
         private void dragDropPanel_DragEnter(object sender, DragEventArgs e)
         {
