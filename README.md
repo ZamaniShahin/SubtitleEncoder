@@ -18,14 +18,13 @@ Subtitle Encoder is a simple application that helps you correct the format of su
 
 ## Getting Started
 
-1. **Download**: Clone or download the project from the [latest release](https://github.com/ZamaniShahin/SubtitleEncoder/releases/tag/v1.0.0).
-2. **Build**: Build the project using your preferred IDE or build tool.
-3. **Run**: Execute the compiled executable file to start using the application.
+1. **Download**: Download the latest release from [here](https://github.com/ZamaniShahin/SubtitleEncoder/releases/tag/v1.0.0).
+2. **Run**: Extract the downloaded ZIP file and run the provided executable file (`SubtitleEncoder.exe`) to start using the application.
 
 ## Compatibility
 
 - **Operating System**: Compatible with Windows.
-- **.NET Runtime**: Requires .NET 8.0 or later. If not installed, the application will bundle the necessary runtime components for self-contained deployment.
+- **.NET Runtime**: The application is bundled with the necessary runtime components, so you don't need to install anything separately.
 
 ## Feedback
 
