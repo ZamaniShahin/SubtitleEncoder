@@ -28,4 +28,4 @@ Subtitle Encoder is a simple application that helps you correct the format of su
 
 ## Feedback
 
-Your feedback is valuable! If you encounter any issues or have suggestions for improvements, please [open an issue](https://github.com/your-username/subtitle-encoder/issues) on GitHub.
+Your feedback is valuable! If you encounter any issues or have suggestions for improvements, please [open an issue](https://github.com/ZamaniShahin/SubtitleEncoder/issues) on GitHub.
