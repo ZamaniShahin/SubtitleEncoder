@@ -18,7 +18,7 @@ Subtitle Encoder is a simple application that helps you correct the format of su
 
 ## Getting Started
 
-1. **Download**: Clone or download the project from the repository.
+1. **Download**: Clone or download the project from the [latest release](https://github.com/ZamaniShahin/SubtitleEncoder/releases/tag/v1.0.0).
 2. **Build**: Build the project using your preferred IDE or build tool.
 3. **Run**: Execute the compiled executable file to start using the application.
 
